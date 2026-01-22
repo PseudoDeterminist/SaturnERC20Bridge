@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Saturn Wrapping Suite</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="https://cdn.jsdelivr.net/npm/ethers@6.12.1/dist/ethers.umd.min.js"></script>
+  </head>
+  <body>
+    <main class="container">
+      <header class="header">
+        <div>
+          <h1>Saturn Wrapping Suite</h1>
+          <p class="subtitle">
+            SATURN (ERC223) <-> STRN (ERC20) <-> STRN10K (ERC20, 0 decimals).
+          </p>
+        </div>
+        <button id="connectBtn" class="btn">Connect Wallet</button>
+      </header>
+
+      <section class="card">
+        <div class="row">
+          <div>
+            <div class="label">Status</div>
+            <div id="status" class="value">Not connected</div>
+          </div>
+          <div class="net">
+            <div class="label">Network</div>
+            <div id="network" class="value">—</div>
+          </div>
+        </div>
+        <div class="row">
+          <div>
+            <div class="label">Wallet</div>
+            <div id="account" class="value">—</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="card">
+        <div class="row">
+          <div>
+            <div class="label">SATURN balance</div>
+            <div id="saturnBalance" class="value">—</div>
+          </div>
+          <div>
+            <div class="label">STRN balance</div>
+            <div id="strnBalance" class="value">—</div>
+          </div>
+          <div>
+            <div class="label">STRN10K balance</div>
+            <div id="saturn10kBalance" class="value">—</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>Wrap</h2>
+        <p id="wrapHint" class="hint">
+          Mint STRN by sending SATURN with the MINT tag. Normal sends won't work.
+        </p>
+        <div class="row">
+          <select id="wrapMode" class="input select">
+            <option value="saturn">SATURN -> STRN</option>
+            <option value="saturn10k">STRN -> STRN10K (lots)</option>
+          </select>
+          <input
+            id="wrapAmount"
+            class="input"
+            placeholder="Amount"
+            inputmode="decimal"
+          />
+          <button id="wrapBtn" class="btn primary">Wrap</button>
+        </div>
+        <div id="lotMeta" class="row">
+          <div>
+            <div class="label">Available lots</div>
+            <div id="lotsAvailable" class="value">—</div>
+          </div>
+          <div>
+            <div class="label">Lot size</div>
+            <div class="value">10,000.0000 STRN</div>
+          </div>
+        </div>
+        <p id="lotHint" class="hint">
+          Requires STRN approval; you will be prompted if needed.
+        </p>
+      </section>
+
+      <section class="card">
+        <h2>Unwrap</h2>
+        <p id="unwrapHint" class="hint">
+          Burn STRN10K to redeem STRN.
+        </p>
+        <div class="row">
+          <select id="unwrapMode" class="input select">
+            <option value="saturn10k">STRN10K -> STRN</option>
+            <option value="wsaturn">STRN -> SATURN</option>
+          </select>
+          <input
+            id="unwrapAmount"
+            class="input"
+            placeholder="Lots"
+            inputmode="decimal"
+          />
+          <button id="unwrapBtn" class="btn primary">Unwrap</button>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>Details</h2>
+        <div class="details">
+          <div>
+            <div class="label">SATURN</div>
+            <div id="saturnAddress" class="mono">—</div>
+          </div>
+          <div>
+            <div class="label">STRN</div>
+            <div id="strnAddress" class="mono">—</div>
+          </div>
+          <div>
+            <div class="label">STRN10K</div>
+            <div id="saturn10kAddress" class="mono">—</div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>
