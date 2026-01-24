@@ -5,7 +5,7 @@
   "scripts": {
     "compile": "hardhat compile",
     "test": "hardhat test",
-    "deploy": "hardhat run scripts/deploy.js",
+    "deploy": "hardhat run scripts/deploy-hardhat.js",
     "verify:etc": "hardhat run scripts/verify-etc.mainnet.js --network etc"
   },
   "devDependencies": {

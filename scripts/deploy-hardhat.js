@@ -1,14 +1,23 @@
 const hre = require("hardhat");
 
 async function main() {
+  if (hre.network.name !== "hardhat") {
+    throw new Error("deploy-hardhat.js is restricted to the hardhat network");
+  }
+
   const [deployer] = await hre.ethers.getSigners();
   console.log("Deployer:", deployer.address);
 
-  const saturnAddress = process.env.SATURN_ADDRESS;
+  let saturnAddress = process.env.SATURN_ADDRESS;
   if (!saturnAddress) {
-    throw new Error("SATURN_ADDRESS is required for mainnet deploys");
+    const Saturn = await hre.ethers.getContractFactory("Saturn");
+    const saturn = await Saturn.deploy();
+    await saturn.waitForDeployment();
+    saturnAddress = await saturn.getAddress();
+    console.log("Saturn (local):", saturnAddress);
+  } else {
+    console.log("Saturn (existing):", saturnAddress);
   }
-  console.log("Saturn (existing):", saturnAddress);
 
   const STRN = await hre.ethers.getContractFactory("SaturnERC20Bridge");
   const strn = await STRN.deploy(saturnAddress);
